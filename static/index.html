@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BRICK AI | House Price Prediction</title>
+    <meta
+      name="description"
+      content="BRICK AI is a house price prediction project based on linear regression."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./config.js"></script>
+    <script defer src="./script.js"></script>
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <div class="ambient ambient-c"></div>
+    <div class="grid-floor"></div>
+
+    <header class="topbar">
+      <div class="brand-wrap">
+        <div class="brand-mark">B</div>
+        <div>
+          <p class="eyebrow">House Price Prediction Project</p>
+          <h1>BRICK AI</h1>
+        </div>
+      </div>
+
+      <div class="topbar-meta">
+        <span class="status-dot"></span>
+        <span id="connectionLabel">Backend connection ready</span>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero panel tilt-card">
+        <div class="hero-copy">
+          <p class="eyebrow">Linear Regression Model</p>
+          <h2>BRICK AI</h2>
+          <p class="hero-text">
+            Predicting House Prices with Data, Not Guesswork.
+          </p>
+
+          <div class="hero-stats">
+            <article>
+              <span>Project</span>
+              <strong>BRICK AI</strong>
+            </article>
+            <article>
+              <span>Model</span>
+              <strong>Linear Regression</strong>
+            </article>
+            <article>
+              <span>Prediction Mode</span>
+              <strong id="predictionMode">Backend First</strong>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="holo-box">
+            <div class="holo-ring ring-one"></div>
+            <div class="holo-ring ring-two"></div>
+            <div class="home-cube">
+              <span class="face face-front"></span>
+              <span class="face face-right"></span>
+              <span class="face face-top"></span>
+            </div>
+            <div class="holo-pulse pulse-one"></div>
+            <div class="holo-pulse pulse-two"></div>
+          </div>
+
+          <div class="live-badge">
+            <span>Live Estimated Snapshot</span>
+            <strong id="heroPrice">Rs 68,13,000</strong>
+            <small>Updates with your form inputs</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <div class="panel form-panel tilt-card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Input Console</p>
+              <h3>Property Configuration</h3>
+            </div>
+            <p>Enter the main property details used by the model for price prediction.</p>
+          </div>
+
+          <details class="api-config">
+            <summary>Backend API settings</summary>
+            <div class="api-config-grid">
+              <label>
+                <span>Preferred prediction endpoint</span>
+                <input
+                  type="text"
+                  id="endpointInput"
+                  value="/predict"
+                  placeholder="Example: http://127.0.0.1:5000/predict"
+                />
+              </label>
+              <p class="hint">
+                The app tries your chosen URL first, then common prediction routes like
+                <code>/api/predict</code>, <code>/prediction</code>, and localhost variants.
+              </p>
+            </div>
+          </details>
+
+          <form id="predictForm" class="predict-form">
+            <div class="input-grid">
+              <label>
+                <span>Area (sq ft)</span>
+                <input type="number" name="area" min="300" value="1350" required />
+              </label>
+              <label>
+                <span>Total Sqft</span>
+                <input type="number" name="total_sqft" min="300" value="1350" required />
+              </label>
+              <label>
+                <span>Bedrooms</span>
+                <input type="number" name="Bedrooms" min="1" max="10" value="3" required />
+              </label>
+              <label>
+                <span>BHK</span>
+                <input type="number" name="bhk" min="1" max="10" value="3" required />
+              </label>
+              <label>
+                <span>Bathrooms</span>
+                <input type="number" name="Bathrooms" min="1" max="10" value="3" required />
+              </label>
+              <label>
+                <span>Parking Slots</span>
+                <input type="number" name="parking" min="0" value="1" required />
+              </label>
+              <label>
+                <span>Lift Count</span>
+                <input type="number" name="Lift" min="0" value="2" required />
+              </label>
+              <label>
+                <span>Price per Sqft</span>
+                <input type="number" name="Price_sqft" min="1000" step="0.01" value="5047.41" required />
+              </label>
+              <label>
+                <span>Latitude</span>
+                <input type="number" name="latitude" step="0.000001" value="28.60885" required />
+              </label>
+              <label>
+                <span>Longitude</span>
+                <input type="number" name="longitude" step="0.000001" value="77.46056" required />
+              </label>
+            </div>
+
+            <div class="preset-row">
+              <button type="button" class="chip" data-preset="compact">Compact Urban</button>
+              <button type="button" class="chip" data-preset="family">Family Premium</button>
+              <button type="button" class="chip" data-preset="luxury">Luxury Skyline</button>
+            </div>
+
+            <div class="button-row">
+              <button type="submit" class="primary-btn" id="predictButton">
+                <span>Predict House Price</span>
+              </button>
+              <button type="button" class="secondary-btn" id="resetButton">Reset</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel output-panel tilt-card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Prediction Output</p>
+              <h3>Decision Dashboard</h3>
+            </div>
+            <p>View the predicted price, estimated range, and current backend status.</p>
+          </div>
+
+          <div class="result-badge" id="resultBadge">Waiting for prediction</div>
+          <div class="result-price" id="resultPrice">Rs --</div>
+          <div class="result-range" id="resultRange">Run a prediction to view the estimated price range.</div>
+
+          <div class="result-grid">
+            <article>
+              <span>Price / sqft</span>
+              <strong id="resultPsf">Rs --</strong>
+            </article>
+            <article>
+              <span>Endpoint Used</span>
+              <strong id="resultEndpoint">Not connected</strong>
+            </article>
+            <article>
+              <span>Payload Strategy</span>
+              <strong id="resultPayload">Waiting</strong>
+            </article>
+            <article>
+              <span>Status</span>
+              <strong id="resultStatus">Ready</strong>
+            </article>
+          </div>
+
+          <div class="message-box" id="messageBox">
+            Start the backend and run a prediction to view the result here.
+          </div>
+        </div>
+      </section>
+
+      <section class="visual-grid">
+        <div class="panel chart-panel tilt-card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Live Processing Visual</p>
+              <h3>Prediction Signal</h3>
+            </div>
+            <p>Shows the processing flow while the prediction request is running.</p>
+          </div>
+          <canvas id="processingCanvas" width="900" height="320"></canvas>
+        </div>
+
+        <div class="panel chart-panel tilt-card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Professional Comparison</p>
+              <h3>Price Scenario Curve</h3>
+            </div>
+            <p>Compares lower, predicted, and upper price bands after each run.</p>
+          </div>
+          <canvas id="scenarioCanvas" width="900" height="320"></canvas>
+        </div>
+      </section>
+
+      <section class="visual-grid secondary-grid">
+        <div class="panel chart-panel tilt-card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Feature Intelligence</p>
+              <h3>Property vs Dataset Baseline</h3>
+            </div>
+            <p>Compares the selected property values with average dataset values.</p>
+          </div>
+          <canvas id="featureCanvas" width="900" height="360"></canvas>
+        </div>
+
+        <div class="panel gallery-panel tilt-card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Model Evidence</p>
+              <h3>ML Graph Gallery</h3>
+            </div>
+            <p>Graphs generated from the model and dataset are shown here.</p>
+          </div>
+
+          <div class="graph-gallery">
+            <figure>
+              <img src="./graph/price_vs_area.png" alt="Price vs Area graph" />
+              <figcaption>Price vs Area</figcaption>
+            </figure>
+            <figure>
+              <img src="./graph/actual_vs_predicted.png" alt="Actual vs Predicted graph" />
+              <figcaption>Actual vs Predicted</figcaption>
+            </figure>
+            <figure>
+              <img src="./graph/residuals_distribution.png" alt="Residual distribution graph" />
+              <figcaption>Residual Distribution</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
